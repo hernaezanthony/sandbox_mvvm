@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.steer.sandbox_mvvm.base.BaseActivity;
 import com.steer.sandbox_mvvm.R;
 import com.steer.sandbox_mvvm.view.fragment.HomeFragment;
+import com.steer.sandbox_mvvm.view.fragment.ImageListFragment;
 import com.steer.sandbox_mvvm.view.fragment.TodoListFragment;
 
 import butterknife.BindView;
@@ -113,7 +114,7 @@ public class MainActivity extends BaseActivity {
                         break;
 
                     case R.id.imageList:
-                        //TODO: create new fragment for images
+                        replaceFragment(new ImageListFragment());
                         break;
                 }
 
