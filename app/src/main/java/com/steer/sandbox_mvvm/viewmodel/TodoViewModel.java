@@ -9,15 +9,18 @@ import androidx.lifecycle.MutableLiveData;
 //import com.steer.sandbox_mvvm.model.Post;
 import com.steer.sandbox_mvvm.model.Post;
 import com.steer.sandbox_mvvm.model.Todo;
+import com.steer.sandbox_mvvm.repository.TodoRepository;
 
 import java.util.ArrayList;
 
 public class TodoViewModel extends AndroidViewModel {
+    public TodoRepository todoRepository =  new TodoRepository();
 
     public MutableLiveData<ArrayList<Todo>> todoMutableLiveData = new MutableLiveData<>();
 
     public TodoViewModel(@NonNull Application application) {
         super(application);
+        todoMutableLiveData = todoRepository.todoMutableLiveData;
     }
 
     public void addItemToListOfTodo(Todo todo){
@@ -32,4 +35,6 @@ public class TodoViewModel extends AndroidViewModel {
         todoMutableLiveData.postValue(todolist);
 
     }
+
+    public void getListOfTodo(){ todoRepository.getListOfTodo();}
 }
