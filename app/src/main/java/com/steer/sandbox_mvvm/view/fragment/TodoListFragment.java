@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.steer.sandbox_mvvm.R;
@@ -77,9 +78,14 @@ public class TodoListFragment extends BaseFragment {
         todoViewModel.todoMutableLiveData.observe(this, new Observer<ArrayList<Todo>>() {
             @Override
             public void onChanged(ArrayList<Todo> todo) {
+                if (todo == null){
+                    Toast.makeText(activity, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 todoArrayList.clear();
                 todoArrayList.addAll(todo);
-               todoListAdapter.notifyDataSetChanged();
+                todoListAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -89,6 +95,9 @@ public class TodoListFragment extends BaseFragment {
         todoRecyclerView.setLayoutManager(mLayoutManager);
         todoListAdapter = new TodoListAdapter(getContext(), todoArrayList);
         todoRecyclerView.setAdapter(todoListAdapter);
+
+        //get recycler view content
+        todoViewModel.getListOfTodo();
     }
 
     private void showAddItemDialog(){
