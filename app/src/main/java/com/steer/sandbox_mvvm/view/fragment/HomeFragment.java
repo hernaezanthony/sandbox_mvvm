@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
@@ -84,6 +85,12 @@ public class HomeFragment extends BaseFragment {
         postViewModel.postsMutableLiveData.observe(this, new Observer<ArrayList<Post>>() {
             @Override
             public void onChanged(ArrayList<Post> posts) {
+
+                if (posts == null){
+                    Toast.makeText(activity, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 postArrayList.clear();
                 postArrayList.addAll(posts);
                 postListAdapter.notifyDataSetChanged();
@@ -97,6 +104,9 @@ public class HomeFragment extends BaseFragment {
         postsRecyclerView.setLayoutManager(mLayoutManager);
         postListAdapter = new PostListAdapter(getContext(), postArrayList);
         postsRecyclerView.setAdapter(postListAdapter);
+
+        //get recyclerView content
+        postViewModel.getListOfPost();
     }
 
     private void showAddItemDialog(){
