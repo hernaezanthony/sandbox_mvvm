@@ -1,5 +1,6 @@
 package com.steer.sandbox_mvvm.service;
 
+import com.steer.sandbox_mvvm.model.Image;
 import com.steer.sandbox_mvvm.model.Post;
 import com.steer.sandbox_mvvm.model.Todo;
 
@@ -16,4 +17,7 @@ public interface ApiService {
 
     @GET("/todos")
     Call<ArrayList<Todo>> getListofTodo();
+
+    @GET("albums/1/photos")
+    Call<ArrayList<Image>> getListofImage();
 }
